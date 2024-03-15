@@ -30,6 +30,22 @@ Dribble is a dynamic online platform designed for football enthusiasts looking t
 - **Database:** MongoDB
 - **Deployment:** Vercel (Frontend & Backend)
 
+
+## Getting Started
+
+1. **Clone the repository:** https://github.com/kalviumcommunity/S53_Sharugeshwaran_Capstone_Dribble.git
+
+2. **Install dependencies:** 
+- For both frontend and backend:
+  ```
+  npm install
+  ```
+
+3. **Start the application:** 
+    ```
+    npm run dev
+    ```
+
 ## Get in Touch
 
 Have questions or suggestions? Feel free to reach out to us at [sharugeshwaran.k@kalvium.community](mailto:sharugeshwaran.k@kalvium.community).
