@@ -287,6 +287,12 @@ const course9 = new Course({
 });
 
 
-const courseData = [course1,course2,course3,course4,course5,course6,course7,course8,course9];
+const courseData = [course1,course2,course3,course4,course5,course6,course7,course9];
 
-Course.insertMany(courseData)
+const addData = () => {
+    Course.insertMany(courseData)
+.then(data => console.log("data added"))
+.catch(err => console.error(err))
+}
+
+module.exports = {addData};

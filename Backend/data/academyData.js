@@ -1,4 +1,4 @@
-const Academy = require("../Schema/AcademySchema/")
+const Academy = require("../Schema/AcademySchema")
 
 const Academy1 = new Academy({
     "name": "Premier India Football Academy (PIFA)",
@@ -222,3 +222,14 @@ const Academy30 = new Academy({
     social : "https://www.facebook.com/people/Football-Plus-India/100064242480071/"
 
 })
+
+const academies =[Academy1, Academy2, Academy3, Academy4, Academy5, Academy6, Academy7, Academy8, Academy9, Academy10, Academy11, Academy12, Academy13, Academy14, Academy15, Academy16, Academy17, Academy18, Academy19, Academy20, Academy21, Academy22, Academy23, Academy24, Academy25, Academy26, Academy27, Academy28, Academy29, Academy30];
+
+
+const addAcademies = () => {
+    Academy.insertMany(academies)
+}
+
+module.exports = {
+    addAcademies
+}
