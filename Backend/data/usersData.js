@@ -8,7 +8,7 @@ const user1 = new User({
     password: "123sds"
 })
 
-const users = user1
+const users = [user1]
 
 const addUsers = () => {
     User.insertMany(users)
