@@ -7,7 +7,7 @@ userRouter.get("/", async (req,res) => {
         const data  = await User.find()
         res.status(200).send(data)
     }catch(err){
-        res.send("Error fetching users: ",err)
+        res.status(500).json({message : err})
     }
 })
 
