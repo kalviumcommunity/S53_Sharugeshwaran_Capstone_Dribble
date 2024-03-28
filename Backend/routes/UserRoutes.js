@@ -64,6 +64,35 @@ userRouter.post("/signup", async (req, res) => {
     }
 });
 
+userRouter.put("/", async (req, res) => {
+    const { name, email, password, bio, city } = req.body;
+
+    try {
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+            const existingUserWithName = await User.findOne({ name });
+            if (existingUserWithName && !existingUserWithName.email == email) {
+                return res.status(400).json({ error: "Username already exists" });
+            }
+            user.name = name;
+
+        user.password = password;
+        user.bio = bio;
+        user.city = city;
+
+        await user.save();
+
+        return res.status(200).json({ message: "User updated successfully", user });
+    } catch (error) {
+        console.error("Error updating user:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 module.exports = {
         userRouter
