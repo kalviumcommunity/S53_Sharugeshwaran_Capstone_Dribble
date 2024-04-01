@@ -74,11 +74,12 @@ userRouter.put("/", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-            const existingUserWithName = await User.findOne({ name });
-            if (existingUserWithName && !existingUserWithName.email == email) {
-                return res.status(400).json({ error: "Username already exists" });
-            }
+        const existingUserWithName = await User.findOne({ name });
+        if (existingUserWithName && !(existingUserWithName.email == email)) {
+            return res.status(400).json({ error: "Username already exists" });
+        }else{
             user.name = name;
+        }
 
         user.password = password;
         user.bio = bio;
