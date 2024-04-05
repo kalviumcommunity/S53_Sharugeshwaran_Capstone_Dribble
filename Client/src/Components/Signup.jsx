@@ -26,9 +26,9 @@ const Signup = () => {
             <input type="text" placeholder='Username' style={{marginBottom: "2vh",height: "5vh",width: "20vw",borderRadius: "8px",outline: "none"}}/><br/>
             <input type="email" placeholder='Enter E-Mail here' style={{marginBottom: "2vh",height: "5vh",width: "20vw",borderRadius: "8px",outline: "none"}}/> <br />
             <input type="text" placeholder='Enter password here' style={{marginBottom: "2vh",height: "5vh",width: "20vw",borderRadius: "8px",outline: "none"}}/>
-            <p style={{color: "blue"}}>Forgot password?</p>
+            <p style={{color: "blue"}}></p>
             </div>
-            <button style={{backgroundColor: "blue",color: "white",fontFamily: "Inter,sansserif",border: "none",height: "5vh",borderRadius: "10px"}}>Log In</button>
+            <button style={{backgroundColor: "blue",color: "white",fontFamily: "Inter,sansserif",border: "none",height: "5vh",borderRadius: "10px"}}>Sign In</button>
             <p>Already have an account? <button style={{backgroundColor: "white",border: "none",color: "blue",fontFamily: "Inter,sansserif"}}>Log In</button></p>
             <div style={{display: "flex",alignItems: "center",justifyContent: "space-around"}}>
 
