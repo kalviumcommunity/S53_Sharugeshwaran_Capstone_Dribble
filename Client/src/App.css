@@ -1,18 +1,47 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 *{
     margin: 0;
     padding: 0;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.title{
-    font-family: "Fira Sans Extra Condensed", sans-serif;
-    font-weight: 900;
-    font-style: italic;
+@font-face {
+    font-family: 'DisplayBold';
+    src: url('/assets/SFProDisplay-Bold.ttf');
 }
-.nav-button{
-    font-family: ;
+@font-face {
+    font-family: 'Textmedium';
+    src: url('/assets/SFProText-Medium.ttf');
+}
+.player{
+    height: 95vh;
+    margin-top: 6%;
+    /* position: fixed; */
+    /* z-index: -12; */
+}
+.title{
+    z-index: 1;
+    /* font-family: "DisplayBold"; */
+    font-family: "Inter",sans-serif;
+    font-size: 230px;
+    font-weight: 800;
+    margin-top: 16vh;
+    color: white;   
+    position: absolute;
+}
+p{
+    /* font-family: "Textmedium"; */
+    /* color: gray; */
+    /* margin-top: 6vh; */
+}
+.hey{
+    background-color: rgba(103, 95, 95, 0.395);
+}
+.signup input{
+    border: 1px solid rgb(178, 178, 178);
+    padding-left: 8px;
+}
+::placeholder{
+    font-family: "Inter",sans-serif;
+    color: rgb(206, 204, 204) ;
+    /* padding: */
 }
