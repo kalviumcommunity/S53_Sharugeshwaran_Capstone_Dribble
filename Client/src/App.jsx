@@ -2,6 +2,7 @@ import React from 'react'
 // import Landing from './Components/Landing'
 import Home from './Components/Home'
 import Signup from './Components/Signup'
+import Login from './Components/Login'
 import "./App.css"
 import "./index.css"
 const App = () => {
@@ -9,7 +10,7 @@ const App = () => {
     <div>
         {/* <Landing/> */}
          {/* <Home/> */}
-         <Signup/>
+         <Login/>
     </div>
   )
 }
