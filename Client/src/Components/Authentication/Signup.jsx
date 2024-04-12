@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import axios
-import Vector from "../assets/Vector.png";
+import Vector from "../../assets/Vector.png";
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [value,setValue] = useState("")
+  const [paa,setpaa] = useState("")
+  const navigate  = useNavigate("/")
+
+  const handleClick = () => {
+    signInWithPopup(auth,provider).then((data) => {
+        setpaa(data.user.password)
+        console.log(paa)
+        localStorage.setItem("email",data.user.email)
+    })
+  }
+
+  useEffect(() => {
+    setValue(localStorage.getItem("email"))
+  })
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -69,10 +85,10 @@ const Signup = () => {
             <div>or</div>
             <div style={{ width: "8vw", backgroundColor: "black", height: "1px" }}></div>
           </div>
-          <div style={{ height: "6vh", border: "2px solid gray", marginBottom: "7vh", display: "flex", justifyContent: "space-around", alignItems: "center", borderRadius: "15px" }}>
+          <button style={{ height: "6vh", border: "2px solid gray", marginBottom: "7vh", display: "flex", justifyContent: "space-around", alignItems: "center", borderRadius: "15px" }} onClick={handleClick}>
             <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/google_logo_icon_169090.png" alt="" style={{ height: "30px" }} />
             <p>Continue with Google</p>
-          </div>
+          </button>
         </div>
       </div>
     </div>
