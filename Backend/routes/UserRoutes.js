@@ -63,17 +63,20 @@ userRouter.post("/signup", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { email } = req.body;
+    const { password } = req.body;
 
     try {
         // Find the user by email
         const user = await User.findOne({ email: email });
 
         if (!user) {
-            return res.status(404).send({ error: "User not found." });
+            return res.status(404).send({ error: "User not found" });
         }
 
-        // Compare passwords using bcrypt
+        if(user && !password){
+            return res.status(200).send(user);
+        }
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {

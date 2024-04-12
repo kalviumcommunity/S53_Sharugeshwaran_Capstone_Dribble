@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
-import Vector from "../assets/Vector.png";
+import axios from 'axios';
+import Vector from "../../assets/Vector.png";
+import { useNavigate } from 'react-router-dom';
+import { auth, provider } from "./config";
+import { signInWithPopup } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -16,18 +19,39 @@ const Login = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    const data = {
-      email,
-      password
-    };
+    event.preventDefault();
+    const data = { email, password };
 
     try {
-      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/Login", data);
+      const response = await axios.post("http://localhost:3000/users/login", data);
       console.log(response.data);
-      console.log("Found") // You can handle the response data as needed
+      console.log("Login successful");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const user = await signInWithPopup(auth, provider);
+      // const user = result.user;
+      const email = user.user.email
+      const info = {
+        email: email
+      }
+      console.log(email)
+      const response = await axios.post("http://localhost:3000/users/login", info);
+      console.log("Login successful");
+      navigate("/home");
+      console.log(response.data);
+      // navigate("/home");
+    } catch (error) {
+      if (error.code === 'auth/cancelled-popup-request') {
+        console.log("Google login cancelled");
+      } else {
+        console.error("Error:", error);
+      }
     }
   };
 
@@ -52,10 +76,10 @@ const Login = () => {
           </div>
           <div className='Login'>
             <form onSubmit={handleSubmit}>
-            <input type="email" placeholder='Enter E-Mail here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none",border: "2px solid lightgray",paddingLeft: "1vw" }} value={email} onChange={handleEmailChange} /> <br />
-              <input type="password" placeholder='Enter password here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none",border: "2px solid lightgray",paddingLeft: "1vw" }} value={password} onChange={handlePasswordChange} />
+              <input type="email" placeholder='Enter E-Mail here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none", border: "2px solid lightgray", paddingLeft: "1vw" }} value={email} onChange={handleEmailChange} /> <br />
+              <input type="password" placeholder='Enter password here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none", border: "2px solid lightgray", paddingLeft: "1vw" }} value={password} onChange={handlePasswordChange} />
               <p style={{ color: "blue" }}></p>
-              <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px",width: "20vw",marginTop: "5vh"}}>Login</button>
+              <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px", width: "20vw", marginTop: "5vh" }}>Login</button>
             </form>
           </div>
           <p>Don't have an account? <button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Sign Up</button></p>
@@ -64,14 +88,14 @@ const Login = () => {
             <div>or</div>
             <div style={{ width: "8vw", backgroundColor: "black", height: "1px" }}></div>
           </div>
-          <div style={{ height: "6vh", border: "2px solid gray", marginBottom: "7vh", display: "flex", justifyContent: "space-around", alignItems: "center", borderRadius: "15px" }}>
+          <button style={{ height: "6vh", border: "2px solid gray", marginBottom: "7vh", display: "flex", justifyContent: "space-around", alignItems: "center", borderRadius: "15px" }} onClick={handleGoogleLogin}>
             <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/google_logo_icon_169090.png" alt="" style={{ height: "30px" }} />
             <p>Continue with Google</p>
-          </div>
+          </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
