@@ -2,6 +2,7 @@ const Course = require('../Schema/CourseSchema.js')
 
 const course1 = new  Course({
     name : "Freestyle For Beginners",
+    thumbnail: "https://soccertraininglab.com/wp-content/uploads/2017/08/Soccer-Freestyle-Tricks-Nam.jpg",
     description : "Dive into the exciting world of freestyle football, where players learn to perform mesmerizing tricks, flicks, and combinations with the ball using various parts of their body. From basic juggling to advanced moves like around the world and akkas, this course is perfect for players looking to add flair and creativity to their game.",
     category : "Technical Skills",
     modules : [
@@ -40,6 +41,7 @@ const course1 = new  Course({
 
 const course2 = new Course({
     name: "Passing and Receiving Techniques",
+    thumbnail: "https://www.professionalsoccercoaching.com/images/drills/cr1part1.gif",
     description: "Master the art of passing and receiving the ball with accuracy and control.",
     category: "Technical Skills",
     modules: [
@@ -76,6 +78,7 @@ const course2 = new Course({
 
 const course3 = new Course({
     name: "Attacking Tactics and Strategies",
+    thumbnail: "https://totalfootballanalysis.com/wp-content/uploads/2019/01/betweenthelines2-1.jpg",
     description: "Learn offensive strategies and formations used in modern football.",
     category: "Tactics & Strategy",
     modules: [
@@ -116,6 +119,7 @@ const course3 = new Course({
 
 const course4 = new Course({
     name: "Defending Strategies and Techniques",
+    thumbnail: "https://completesoccerguide.com/wp-content/uploads/2010/03/Dollarphotoclub_62103985.jpg",
     description: "Learn defensive formations, positioning, and tackling techniques.",
     category: "Tactics & Strategy",
     modules: [
@@ -156,6 +160,7 @@ const course4 = new Course({
 
 const course5= new Course({
     name: "Goalkeeping Fundamentals",
+    thumbnail: "https://st.depositphotos.com/2803423/4841/i/450/depositphotos_48412579-stock-photo-goalkeepers-hands-reaching-for-foot.jpg",
     description: "Learn essential skills and techniques for goalkeepers.",
     category: "Goalkeeping",
     modules: [
@@ -188,6 +193,7 @@ const course5= new Course({
 
 const course6 = new Course({
     name: "Strength and Conditioning for Football",
+    thumbnail: "https://contents.mediadecathlon.com/p1904573/k$6d75ca9d525ddcb49c60e49be8ef7155/1920x0/1968pt1312/3936xcr2547/default.jpg?format=auto",
     description: "Develop the physical fitness needed for peak performance on the field.",
     category: "Fitness & Conditioning",
     modules: [
@@ -216,6 +222,7 @@ const course6 = new Course({
 
 const course7 = new Course({
     name: "The History of Football",
+    thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQR_h09gor3HmD6Ox66W7-ot888oIyrIWD1ICPbpsMOQ&s",
     description: "Explore the evolution of football from its origins to the modern game.",
     category: "Football History & Culture",
     modules: [
@@ -256,6 +263,7 @@ const course7 = new Course({
 
 const course9 = new Course({
     name: "Football Psychology and Mentality",
+    thumbnail: "https://www.thestar.co.uk/webimg/b25lY21zOjAzYWZhMjQ1LTE2OGItNDQ1ZS05MzA0LTIxZTdkMTU0MDU2NjpkMGM2Mzg1Yi05NTUwLTRlN2MtOWUwNS1jNTBhMTkwZDFmNTM=.jpg?crop=3:2,smart&width=640&quality=65",
     description: "Learn mental skills to improve focus, confidence, and performance.",
     category: "Mental Skills & Mindset",
     modules: [
