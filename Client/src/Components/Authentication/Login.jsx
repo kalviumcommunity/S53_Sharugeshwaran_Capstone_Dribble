@@ -41,7 +41,7 @@ const Login = () => {
         email: email
       }
       console.log(email)
-      const response = await axios.post("http://localhost:3000/users/login", info);
+      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/login", info);
       console.log("Login successful");
       navigate("/home");
       console.log(response.data);

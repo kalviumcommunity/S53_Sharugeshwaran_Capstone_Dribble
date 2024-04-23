@@ -13,7 +13,7 @@ const Home = () => {
 
   const { scrollYProgress } = useViewportScroll();
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 700]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 750]);
 
 
   const variants = {

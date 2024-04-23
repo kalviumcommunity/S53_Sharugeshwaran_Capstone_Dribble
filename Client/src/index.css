@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=c17457&c2=eb25d2&gt=l&gd=dtl
+*/
+background: #C17457;
+background: linear-gradient(135deg, #C17457, #EB25D2);
