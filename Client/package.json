@@ -13,6 +13,7 @@
     "@auth0/auth0-react": "^2.2.4",
     "@nextui-org/react": "^2.3.5",
     "axios": "^1.6.8",
+    "cloudinary": "^2.2.0",
     "firebase": "^10.10.0",
     "framer-motion": "^11.1.7",
     "parallax": "^0.0.0",

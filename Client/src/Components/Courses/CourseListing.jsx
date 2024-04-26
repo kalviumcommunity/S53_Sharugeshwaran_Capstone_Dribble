@@ -6,7 +6,7 @@ const CourseListing = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://s53-sharugeshwaran-capstone-dribble.onrender.com/courses');
+                const response = await fetch('https://backend-cyan-two.vercel.app/courses');
                 const data = await response.json();
                 setCourses(data);
                 console.log(data)

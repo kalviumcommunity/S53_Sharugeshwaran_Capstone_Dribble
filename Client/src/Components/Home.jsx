@@ -40,7 +40,7 @@ const Home = () => {
         {fadeInComplete && <AnimatedText text='Dribble' className='title' />}
       </div>
 
-      <div style={{height: "100%", width: "85%", backgroundColor: "white",zIndex: "1",filter: "blur(12)"}}>
+      <div style={{height: "100%", width: "85%", backgroundColor: "white",zIndex: "1",filter: "blur(12)",borderRadius: "20px"}}>
         <Nav/>
         <motion.section style={{
           display: "flex",

@@ -41,10 +41,10 @@ const Login = () => {
         email: email
       }
       console.log(email)
-      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/login", info);
+      const response = await axios.post("https://backend-cyan-two.vercel.app/users/login", info);
       console.log("Login successful");
-      navigate("/home");
       console.log(response.data);
+      navigate("/home");
       // navigate("/home");
     } catch (error) {
       if (error.code === 'auth/cancelled-popup-request') {

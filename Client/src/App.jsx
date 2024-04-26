@@ -1,6 +1,6 @@
 import React from 'react'
 // import Landing from './Components/Landing'
-import Drop from './Components/Courses/Drop'
+// import Drop from './Components/Courses/Drop'
 import Home from './Components/Home'
 import Signup from './Components/Authentication/Signup'
 import Login from './Components/Authentication/Login'
@@ -14,8 +14,8 @@ const App = () => {
          {/* <Home/> */}
          {/* <Login/> */}
          {/* <Signup/> */}
-         {/* <Allroutes/> */}
-         <Drop/>
+         <Allroutes/>
+         {/* <Drop/> */}
     </div>
   )
 }

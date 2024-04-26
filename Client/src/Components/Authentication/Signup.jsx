@@ -45,7 +45,7 @@ const Signup = () => {
     };
 
     try {
-      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/signup", data);
+      const response = await axios.post("https://backend-cyan-two.vercel.app/users/signup", data);
       console.log(response.data);
       navigate("/home") // You can handle the response data as needed
     } catch (error) {
