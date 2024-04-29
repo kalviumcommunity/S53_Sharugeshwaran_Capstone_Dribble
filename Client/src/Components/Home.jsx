@@ -2,18 +2,23 @@ import React from 'react';
 import player from "../assets/player.png";
 import {motion,useViewportScroll,useTransform} from "framer-motion"
 import { useState,useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 
 const Home = () => {
   const [fadeInComplete, setFadeInComplete] = useState(false);
+  const location = useLocation();
+  const data = location.state;
+  const name = data.name 
+  const navigate = useNavigate()
 
   const handleFadeInComplete = () => {
     setFadeInComplete(true);
   };
-
+  
   const { scrollYProgress } = useViewportScroll();
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 700]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 750]);
 
 
   const variants = {
@@ -40,8 +45,8 @@ const Home = () => {
         {fadeInComplete && <AnimatedText text='Dribble' className='title' />}
       </div>
 
-      <div style={{height: "100%", width: "85%", backgroundColor: "white",zIndex: "1",filter: "blur(12)"}}>
-        <Nav/>
+      <div style={{height: "100%", width: "85%", backgroundColor: "white",zIndex: "1",filter: "blur(12)",borderRadius: "20px"}}>
+        <Nav profile={data.profilePhoto} name = {data.name}/>
         <motion.section style={{
           display: "flex",
           marginTop: "29vh",

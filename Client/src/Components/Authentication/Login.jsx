@@ -26,7 +26,7 @@ const Login = () => {
       const response = await axios.post("http://localhost:3000/users/login", data);
       console.log(response.data);
       console.log("Login successful");
-      navigate("/home");
+      navigate("/home",{state:response.data});
     } catch (error) {
       console.error("Error:", error);
     }
@@ -41,10 +41,10 @@ const Login = () => {
         email: email
       }
       console.log(email)
-      const response = await axios.post("http://localhost:3000/users/login", info);
+      const response = await axios.post("https://backend-cyan-two.vercel.app/users/login", info);
       console.log("Login successful");
-      navigate("/home");
       console.log(response.data);
+      navigate("/home",{state:response.data});
       // navigate("/home");
     } catch (error) {
       if (error.code === 'auth/cancelled-popup-request') {

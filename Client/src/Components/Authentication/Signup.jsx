@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import axios
 import Vector from "../../assets/Vector.png";
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,7 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [value,setValue] = useState("")
   const [paa,setpaa] = useState("")
-  const navigate  = useNavigate("/")
+  const navigate  = useNavigate("")
 
   const handleClick = () => {
     signInWithPopup(auth,provider).then((data) => {
@@ -44,8 +45,9 @@ const Signup = () => {
     };
 
     try {
-      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/signup", data);
-      console.log(response.data); // You can handle the response data as needed
+      const response = await axios.post("https://backend-cyan-two.vercel.app/users/signup", data);
+      console.log(response.data);
+      navigate("/home") // You can handle the response data as needed
     } catch (error) {
       console.error("Error:", error);
     }
@@ -59,7 +61,7 @@ const Signup = () => {
         </div>
         <div style={{
           marginLeft: "5%",
-          marginTop: "5%",
+          marginTop: "",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-evenly",
@@ -78,17 +80,9 @@ const Signup = () => {
               <p style={{ color: "blue" }}></p>
               <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px",width: "20vw",marginTop: "5vh"}}>Sign Up</button>
             </form>
+          <p style={{marginTop: "2%"}}>Already have an account? <Link to={"/login"}><button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Log In</button></Link></p>
           </div>
-          <p>Already have an account? <button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Log In</button></p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <div style={{ width: "8vw", backgroundColor: "black", height: "1px" }}></div>
-            <div>or</div>
-            <div style={{ width: "8vw", backgroundColor: "black", height: "1px" }}></div>
-          </div>
-          <button style={{ height: "6vh", border: "2px solid gray", marginBottom: "7vh", display: "flex", justifyContent: "space-around", alignItems: "center", borderRadius: "15px" }} onClick={handleClick}>
-            <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/google_logo_icon_169090.png" alt="" style={{ height: "30px" }} />
-            <p>Continue with Google</p>
-          </button>
+          
         </div>
       </div>
     </div>

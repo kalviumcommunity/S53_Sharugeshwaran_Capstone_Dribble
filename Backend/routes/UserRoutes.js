@@ -64,11 +64,17 @@ userRouter.post("/signup", async (req, res) => {
 
 userRouter.post("/login", async (req, res) => {
     const { email } = req.body;
+    // console.log(hi)
+    if(!email){
+        return res.status(400).send("No email was sent.")
+    }
+    console.log(email)
     const { password } = req.body;
 
     try {
         // Find the user by email
         const user = await User.findOne({ email: email });
+
 
         if (!user) {
             return res.status(404).send({ error: "User not found" });
@@ -118,6 +124,17 @@ userRouter.put("/", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+userRouter.post("/profile",async(req,res) => {
+    const {name} = req.body
+    try {
+        const  user  = await User.findOne({name})
+        res.status(200).json({user}) 
+    } catch (error) {
+        res.status(400).send("Error: ",error)
+    }
+
+})
 
 
 
