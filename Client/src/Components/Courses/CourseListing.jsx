@@ -20,18 +20,18 @@ const CourseListing = () => {
 
   return (
     <>
-        <Nav/>
-        <div style={{display: "flex",flexDirection: "column", justifyContent: "space-around", padding: "3vh 0", alignItems: "center",marginTop: "10vh"}}>
-            <div style={{display: "flex",width: '100%',justifyContent: "space-around"}}>
+        {/* <Nav/> */}
+        <div style={{display: "flex",flexDirection: "column", justifyContent: "space-around", padding: "3vh 0", alignItems: "center",paddingTop: "10vh"}}>
+            <div style={{display: "flex",width: '100%',justifyContent: "space-around",alignItems: "center"}}>
                 <div>
 
                 <div style={{fontSize: "4rem",color: "rgb(202, 69, 65)",fontWeight: "700",lineHeight: "75px",fontFamily: "Inter"}}>
                     Training
                     <br /><span style={{color: "rgb(62, 62, 62)"}}>Courses</span>
                 </div>
-                <div style={{fontSize: "15px",marginTop: "2vh"}} jni>
-                    ⚡(Number of courses)
-                </div>
+                <div style={{fontSize: "15px",marginTop: "2vh",fontFamily: "'Inter',sans-serif"}} jni>
+                    ⚡{courses.length}  courses
+                 </div>
             <div style={{fontSize: "15px",marginTop: "2vh",fontFamily:"'Inter',sansserif",color: "gray"}}>
             This courses are catered to the latest trends in the football. <br /> Watch, learn and perform to complete a specific skill. 
             </div>

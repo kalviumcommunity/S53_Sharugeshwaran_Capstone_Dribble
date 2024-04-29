@@ -6,6 +6,7 @@ import Signup from './Authentication/Signup';
 import CourseListing from './Courses/CourseListing';
 import CourseVideo from './Courses/CourseVideo';
 import CourseLesson from './Courses/CourseLesson';
+import UserDashboard from './User/UserDashboard';
 
 const Allroutes = () => {
   return (
@@ -18,6 +19,7 @@ const Allroutes = () => {
           <Route path="/courses" element={<CourseListing/>} /> 
           <Route path='/courseVideo' element={<CourseVideo/>}/>
           <Route path='/courselesson' element={<CourseLesson/>}/>
+          <Route path='/userdashboard' element={<UserDashboard/>}/>
           </Routes>   
       </div>
 

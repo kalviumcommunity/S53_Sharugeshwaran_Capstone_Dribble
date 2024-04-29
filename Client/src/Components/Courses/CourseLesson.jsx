@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from '../Nav';
 import AccordionItem from './AccordionItem'; // Import the AccordionItem component
@@ -10,14 +10,14 @@ const CourseLesson = () => {
 
     return (
         <div>
-            <Nav />
-            <div style={{ display: "flex", width: '100%', justifyContent: "space-around", marginTop: "10vh" }}>
+            {/* <Nav /> */}
+            <div style={{ display: "flex", width: '100%', justifyContent: "space-around", paddingTop: "10vh" }}>
                 <div>
                     <div style={{ fontSize: "2.05rem", color: "rgb(62, 62, 62)", fontWeight: "700", lineHeight: "55px", fontFamily: "Inter", width: "30vw" }}>
                         {data.name}
                     </div>
-                    <div style={{ fontSize: "15px", marginTop: "2vh" }} jni>
-                        ⚡(Number of courses)
+                    <div style={{ fontSize: "15px", marginTop: "2vh",fontFamily: "'Inter',sans-serif" }}>
+                        ⚡{lessons.length} lessons
                     </div>
                     <div style={{ fontSize: "15px", marginTop: "2vh", fontFamily: "'Inter',sansserif", color: "gray" }}>
                         This courses are catered to the latest trends in the football. <br /> Watch, learn and perform to complete a specific skill.

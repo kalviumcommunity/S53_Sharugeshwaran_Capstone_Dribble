@@ -125,6 +125,17 @@ userRouter.put("/", async (req, res) => {
     }
 });
 
+userRouter.post("/profile",async(req,res) => {
+    const {name} = req.body
+    try {
+        const  user  = await User.findOne({name})
+        res.status(200).json({user}) 
+    } catch (error) {
+        res.status(400).send("Error: ",error)
+    }
+
+})
+
 
 
 

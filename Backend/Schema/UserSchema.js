@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
   city: {
     type: String,
   },
+  profilePhoto:{
+    type: String
+  }
 });
 
 

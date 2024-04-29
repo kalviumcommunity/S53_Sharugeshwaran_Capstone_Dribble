@@ -80,4 +80,6 @@ p{
   .course-card:hover .overlay {
     opacity: 1;
   }
-  
+  .bio{
+    background-color: rgb(235, 233, 233);
+  }

@@ -1,8 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Nav = () => {
+const Nav = ({profile,name}) => {
   const navigate = useNavigate();
+
+  const gotoDashboard = () => {
+    navigate("/userdashboard", { state: name });
+  }
 
   return (
     <div>
@@ -16,9 +20,9 @@ const Nav = () => {
           <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}} onClick={() => navigate("/courses")}>Courses</button>
           <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}}>About</button>
         </div>
-        <div style={{width: "15vw", display: "flex", justifyContent: "space-around"}}>
-          <button className='nav-buttons' style={{backgroundColor: "rgb(202, 69, 65)",height: "5vh",width: "6vw",borderRadius: "15px", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500",color:"white"}}>Sign Up</button>
-          <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}}>Log In</button>
+        <div style={{width: "13vw", display: "flex", justifyContent: "space-around",alignItems: "center"}} onClick={gotoDashboard}>
+          <img src={profile} alt="" style={{borderRadius:"50%",height: "7vh",fontFamily: "'Inter',sans-serif"}}/>
+          <p>{name}</p>
         </div>
       </nav>
     </div>
