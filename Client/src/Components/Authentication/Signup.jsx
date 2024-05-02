@@ -12,13 +12,6 @@ const Signup = () => {
   const [paa,setpaa] = useState("")
   const navigate  = useNavigate("")
 
-  const handleClick = () => {
-    signInWithPopup(auth,provider).then((data) => {
-        setpaa(data.user.password)
-        console.log(paa)
-        localStorage.setItem("email",data.user.email)
-    })
-  }
 
   useEffect(() => {
     setValue(localStorage.getItem("email"))
@@ -47,7 +40,7 @@ const Signup = () => {
     try {
       const response = await axios.post("https://backend-cyan-two.vercel.app/users/signup", data);
       console.log(response.data);
-      navigate("/home") // You can handle the response data as needed
+      navigate("/home",{state: response.data.user}) // You can handle the response data as needed
     } catch (error) {
       console.error("Error:", error);
     }
