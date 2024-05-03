@@ -87,14 +87,18 @@ const Popup = ({}) => {
                     </label><br />
                         <textarea name="bio" value={updatedUserData.bio} onChange={handleInputChange} style={{width: "25vw",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}></textarea>
                     </div>
-                    <div>
-                    <label>
-                        Profile Photo:
-                    </label><br />
-                        <input type="text" name="profilePhoto" value={updatedUserData.profilePhoto} onChange={handleInputChange} style={{width: "25vw",height: "5vh",borderRadius: "10px",padding: "2%",marginTop: "1vh"}}/>
-                    </div>
+
                     <button type="submit" style={{background: "black",color: "white",width: "6vw",marginLeft: "9vw",marginTop: "4vh",height: "5vh",borderRadius: "7px"}}>Update</button>
                 </form>
+                    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the files here ...</p> :
+          <button>Upload Picture</button>
+      }
+    </div>
+
             </div>
         </div>
     );
