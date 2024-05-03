@@ -107,6 +107,8 @@ const Popup = ({}) => {
                     </label><br />
                         <textarea name="bio" value={updatedUserData.bio} onChange={handleInputChange} style={{width: "25vw",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}></textarea>
                     </div>
+                    <button type="submit" style={{background: "black",color: "white",width: "6vw",marginLeft: "9vw",marginTop: "4vh",height: "5vh",borderRadius: "7px"}}>Update</button>
+                </form>
                     <div {...getRootProps()}>
       <input {...getInputProps()} />
       {
@@ -115,8 +117,6 @@ const Popup = ({}) => {
           <button>Upload Picture</button>
       }
     </div>
-                    <button type="submit" style={{background: "black",color: "white",width: "6vw",marginLeft: "9vw",marginTop: "4vh",height: "5vh",borderRadius: "7px"}}>Update</button>
-                </form>
                 
             </div>
         </div>
