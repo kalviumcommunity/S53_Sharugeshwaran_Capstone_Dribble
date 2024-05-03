@@ -1,4 +1,6 @@
 // import React, {useCallback} from 'react'
+// import {useDropzone} from 'react-dropzone'
+// import { addToCloudinary } from './Cloudinary'
 
 
 
@@ -9,7 +11,7 @@
     
 //     // Do something with the files
 //     console.log(files);
-//     // addToCloudinary(files);
+//     addToCloudinary(files);
 //   }, []);
 //   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
