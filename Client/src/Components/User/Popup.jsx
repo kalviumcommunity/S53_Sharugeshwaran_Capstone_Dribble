@@ -1,8 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
-import {useDropzone} from 'react-dropzone'
-import { addToCloudinary } from './Cloudinary'
 
 
 const Popup = ({}) => {
@@ -16,31 +14,15 @@ const Popup = ({}) => {
         userName: '',
         city: '',
         bio: '',
+        email: ''
     });
     const location = useLocation();
-    const onDrop = useCallback(async (acceptedFiles) => {
-        try {
-            // console.log(acceptedFiles);
-            // Filter out any non-file items from acceptedFiles array
-            const files = acceptedFiles.filter((file) => file instanceof File);
-            // Do something with the files
-            // console.log(files);
-            // Upload files to Cloudinary and get the link
-            const link = await addToCloudinary(files);
-            // Update the user data with the email and profile photo link
-            setUpdatedUserData({ ...updatedUserData, userEmail: email, profilePhoto: link });
-        } catch (error) {
-            console.error('Error uploading files to Cloudinary:', error);
-        }
-    }, []);
-    
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-    const email = location.state;
-    
+    const name = location.state;
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("http://localhost:3000/users/profile", { email });
+                const response = await axios.post("https://backend-cyan-two.vercel.app/users/profile", { name });
                 const userData = response.data.user;
                 setUserData(userData);
                 setUpdatedUserData({
@@ -48,30 +30,28 @@ const Popup = ({}) => {
                     userName: userData.name,
                     city: userData.city,
                     bio: userData.bio,
-                    userEmail: userData.email
+                    email: userData.email
                 });
                 // navi()
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-        
+
         fetchData();
     }, []);
-    
-    // console.log(userData)
-    
+
+    console.log(userData)
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUpdatedUserData({ ...updatedUserData, [name]: value });
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // setUpdatedUserData({...updatedUserData,[profilePhoto] : link})
-            // setUpdatedUserData({ ...updatedUserData, profilePhoto: link });
-            await axios.put("http://localhost:3000/users/profile/update", updatedUserData);
+            await axios.put("https://backend-cyan-two.vercel.app/users/profile/update", updatedUserData);
             // onClose(); // Close the popup
             console.log("User updated successfully");
             navi()
@@ -107,17 +87,14 @@ const Popup = ({}) => {
                     </label><br />
                         <textarea name="bio" value={updatedUserData.bio} onChange={handleInputChange} style={{width: "25vw",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}></textarea>
                     </div>
-                    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <button>Upload Picture</button>
-      }
-    </div>
+                    <div>
+                    <label>
+                        Profile Photo:
+                    </label><br />
+                        <input type="text" name="profilePhoto" value={updatedUserData.profilePhoto} onChange={handleInputChange} style={{width: "25vw",height: "5vh",borderRadius: "10px",padding: "2%",marginTop: "1vh"}}/>
+                    </div>
                     <button type="submit" style={{background: "black",color: "white",width: "6vw",marginLeft: "9vw",marginTop: "4vh",height: "5vh",borderRadius: "7px"}}>Update</button>
                 </form>
-                
             </div>
         </div>
     );
