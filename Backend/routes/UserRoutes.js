@@ -95,9 +95,9 @@ userRouter.post("/login", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-userRouter.put("/", async (req, res) => {
-    const { name, email, password, bio, city } = req.body;
-
+userRouter.put("/profile/update", async (req, res) => {
+    const { userName, profilePhoto,userEmail, bio, city } = req.body;
+    const email = userEmail
     try {
         let user = await User.findOne({ email });
 
@@ -105,16 +105,17 @@ userRouter.put("/", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        const existingUserWithName = await User.findOne({ name });
+        const existingUserWithName = await User.findOne({ userName });
         if (existingUserWithName && !(existingUserWithName.email == email)) {
             return res.status(400).json({ error: "Username already exists" });
         }else{
-            user.name = name;
+            user.name = userName;
         }
 
-        user.password = password;
+        // user.password = password;
         user.bio = bio;
         user.city = city;
+        user.profilePhoto = profilePhoto
 
         await user.save();
 
@@ -126,12 +127,28 @@ userRouter.put("/", async (req, res) => {
 });
 
 userRouter.post("/profile",async(req,res) => {
-    const {name} = req.body
+    const {email} = req.body
     try {
-        const  user  = await User.findOne({name})
+        const  user  = await User.findOne({email})
         res.status(200).json({user}) 
     } catch (error) {
         res.status(400).send("Error: ",error)
+    }
+
+})
+
+userRouter.delete("/profileDelete", async(req,res) => {
+    console.log(req.body)
+    const email = req.body
+
+    try {
+        const user = await User.findOneAndDelete(email)
+        if(!user){
+            return res.status(404).json({error: "User not found"})
+        }
+        res.status(200).json({message: "User deleted successfully"})
+    } catch (error) {
+        res.status(400).json({Error: error})
     }
 
 })

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 
+// import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +19,10 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  const navigateSignup = () => {
+    navigate("/")
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -82,7 +88,7 @@ const Login = () => {
               <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px", width: "20vw", marginTop: "5vh" }}>Login</button>
             </form>
           </div>
-          <p>Don't have an account? <button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Sign Up</button></p>
+          <p>Don't have an account? <button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }} onClick={navigateSignup}>Sign Up</button></p>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
             <div style={{ width: "8vw", backgroundColor: "black", height: "1px" }}></div>
             <div>or</div>

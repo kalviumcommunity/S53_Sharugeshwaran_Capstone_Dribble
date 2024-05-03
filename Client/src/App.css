@@ -29,11 +29,7 @@
     color: white;   
     position: absolute;
 }
-p{
-    /* font-family: "Textmedium"; */
-    /* color: gray; */
-    /* margin-top: 6vh; */
-}
+
 .hey{
     background-color: rgba(103, 95, 95, 0.395);
 }
@@ -82,4 +78,10 @@ p{
   }
   .bio{
     background-color: rgb(235, 233, 233);
+  }
+  .popup, .dash{
+    background-color: rgb(207, 207, 207);
+  }
+  label{
+    color: white;
   }

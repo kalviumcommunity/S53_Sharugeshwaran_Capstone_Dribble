@@ -46,7 +46,7 @@ const Home = () => {
       </div>
 
       <div style={{height: "100%", width: "85%", backgroundColor: "white",zIndex: "1",filter: "blur(12)",borderRadius: "20px"}}>
-        <Nav profile={data.profilePhoto} name = {data.name}/>
+        <Nav profile={data.profilePhoto} name = {name}/>
         <motion.section style={{
           display: "flex",
           marginTop: "29vh",

@@ -7,6 +7,7 @@ import CourseListing from './Courses/CourseListing';
 import CourseVideo from './Courses/CourseVideo';
 import CourseLesson from './Courses/CourseLesson';
 import UserDashboard from './User/UserDashboard';
+import Popup from './User/Popup';
 
 const Allroutes = () => {
   return (
@@ -20,6 +21,7 @@ const Allroutes = () => {
           <Route path='/courseVideo' element={<CourseVideo/>}/>
           <Route path='/courselesson' element={<CourseLesson/>}/>
           <Route path='/userdashboard' element={<UserDashboard/>}/>
+          <Route path='/profileupdate' element={<Popup/>}/>
           </Routes>   
       </div>
 
