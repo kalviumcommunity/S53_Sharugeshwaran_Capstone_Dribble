@@ -50,7 +50,7 @@ const UserDashboard = () => {
 
     // const email = userData.email
     const navigateFunc = () => {
-        navigate("/profileupdate",{state: name})
+        navigate("/profileupdate",{state: email})
     }
  
 
@@ -72,12 +72,12 @@ const UserDashboard = () => {
                 <div style={{display: "flex",justifyContent: "space-between",alignItems: "center",width: "50vw",flexDirection: "column"}}>
                     <div style={{height: "10vh",backgroundColor: "white",width: "100%",borderTopLeftRadius: "15px",borderTopRightRadius:"15px"}}></div>
                     <div style={{height: "20vh",backgroundColor: "rgb(62, 62, 62)",width: "100%",marginTop: "1vh",borderBottomRightRadius: "15px",borderBottomLeftRadius: "15px"}}></div>
-                    <div style={{position: "absolute",display: "flex",flexDirection: "column",alignItems: "center",textAlign: "center",color: "white",zIndex: "1",top: "30vh"}}>
+                    <div style={{position: "absolute",display: "flex",flexDirection: "column",alignItems: "center",textAlign: "center",color: "white",zIndex: "1",top: "29vh"}}>
                     <img src={!userData.profilePhoto ? profilePic:userData.profilePhoto} alt="" style={{ borderRadius: "50%", height: "15vh" }} />
 
                         <div>
-                            <p style={{fontSize:"1.25rem",marginTop: "2vh"}}>{name}</p>
-                            <p style={{color: "gray"}}>{userData.email}</p>
+                            <p style={{fontSize:"1.25rem",marginTop: "1vh"}}>{name}</p>
+                            {/* <p style={{color: "gray"}}>{userData.email}</p> */}
                             <p style={{color: "gray"}}>{userData.city}</p>
                         </div>
                     </div>

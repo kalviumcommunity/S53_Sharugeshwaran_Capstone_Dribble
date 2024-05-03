@@ -96,8 +96,8 @@ userRouter.post("/login", async (req, res) => {
     }
 });
 userRouter.put("/profile/update", async (req, res) => {
-    const { userName, profilePhoto,email, bio, city } = req.body;
-
+    const { userName, profilePhoto,userEmail, bio, city } = req.body;
+    const email = userEmail
     try {
         let user = await User.findOne({ email });
 
@@ -127,9 +127,9 @@ userRouter.put("/profile/update", async (req, res) => {
 });
 
 userRouter.post("/profile",async(req,res) => {
-    const {name} = req.body
+    const {email} = req.body
     try {
-        const  user  = await User.findOne({name})
+        const  user  = await User.findOne({email})
         res.status(200).json({user}) 
     } catch (error) {
         res.status(400).send("Error: ",error)
