@@ -85,3 +85,22 @@
   label{
     color: white;
   }
+  .category-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    margin-top: 5vh;
+  }
+  
+  .category-container::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .category-button{
+    border: 0.5px solid black;
+    margin: 2vw;
+    padding: 2vh 3vw;
+    border-radius: 10px;
+    
+  }

@@ -2,15 +2,25 @@ const express = require( 'express' );
 const AcademyRouter = express.Router()
 const Academy = require("../Schema/AcademySchema")
 
-AcademyRouter.get("/", async(req,res) => {
-    try{
-    const data = await Academy.find()
-    res.status(200).send(data)
-    }catch(err){
-        console.log(err);
-        res.status(400).send(`Error: ${err}`)
+AcademyRouter.post("/", async (req, res) => {
+    const { location } = req.body;
+
+    try {
+        let data;
+        
+        if (!location) {
+            data = await Academy.find();
+        } else {
+            data = await Academy.find({ location: location });
+        }
+
+        res.status(200).send(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(`Error: ${err}`);
     }
-})
+});
+
 
 module.exports = {
     AcademyRouter
