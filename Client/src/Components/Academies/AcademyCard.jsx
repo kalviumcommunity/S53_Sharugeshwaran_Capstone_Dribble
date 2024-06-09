@@ -9,9 +9,9 @@ const AcademyCard = ({ data }) => {
         console.log("Drag end"); // Add a console log to check if handleDragEnd is triggered
         controls.start({ x: 0, y: 0 });
     };
-    // const navigateFunc = () => {
-    //     navigate("/courseVideo",{state: data})
-    // }
+    const navigateFunc = () => {
+        navigate("/details",{state: data})
+    }
     return (
         <motion.div
             className="course-card"
@@ -24,6 +24,7 @@ const AcademyCard = ({ data }) => {
             transition={{ duration: 1 }}
             // style={{width: "25vw"}}
             // onClick={navigateFunc}
+            onClick={navigateFunc}
         >
             <AnimatePresence>
                 <motion.div

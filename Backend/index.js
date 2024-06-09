@@ -13,7 +13,7 @@ async function connectToDatabase(){
     try{
         await mongoose.connect(process.env.MONGO_URI);
         console.log("Database connected!!!")
-        // addAcademies()
+        // addAcademies()   
 
     }catch(err){
         console.log("Error connecting to database: ",err)

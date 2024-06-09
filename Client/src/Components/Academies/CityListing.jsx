@@ -48,19 +48,20 @@ const Citylisting = () => {
                         Academies
                     </div>
                     <div style={{
-                        fontSize: "15px", 
-                        marginTop: "2vh", 
-                        fontFamily: "'Inter', sans-serif"
-                    }}>
-                        ⚡ {academies.length} courses
-                    </div>
+    fontSize: "15px", 
+    marginTop: "2vh", 
+    fontFamily: "'Inter', sans-serif"
+}}>
+    ⚡{academies.length}   {academies.length === 1 ? "  Academy" : "  Academies"}
+</div>
+
                     <div style={{
                         fontSize: "15px", 
                         marginTop: "2vh", 
                         fontFamily: "'Inter', sans-serif", 
                         color: "gray"
                     }}>
-                        These courses are catered to the latest trends in football. <br /> Watch, learn and perform to complete a specific skill.
+                        These academies listed below are accredited by  All India Football Federation. <br />
                     </div>
                 </div>
                 <div>

@@ -11,12 +11,15 @@ const academySchema = new mongoose.Schema({
   location: {
     type: String,
   },
-  website: {
+  social: {
     type: String,
   },
-  contactEmail: {
+  contact: {
     type: String,
   },
+  State: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('Academy', academySchema);
