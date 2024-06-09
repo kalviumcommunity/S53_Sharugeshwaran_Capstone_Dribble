@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit')
 const {courseRouter} = require("./routes/CourseRoutes");
 const {AcademyRouter} = require("./routes/AcademyRoutes");
 const {userRouter} = require('./routes/UserRoutes')
+const {addAcademies} = require("./data/academyData")
 
 require("dotenv").config()
 
@@ -12,6 +13,7 @@ async function connectToDatabase(){
     try{
         await mongoose.connect(process.env.MONGO_URI);
         console.log("Database connected!!!")
+        // addAcademies()   
 
     }catch(err){
         console.log("Error connecting to database: ",err)

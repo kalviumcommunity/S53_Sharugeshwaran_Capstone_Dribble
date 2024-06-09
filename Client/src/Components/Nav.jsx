@@ -7,6 +7,9 @@ const Nav = ({profile,name}) => {
   const gotoDashboard = () => {
     navigate("/userdashboard", { state: name });
   }
+  const gotoAcademies = () => {
+    navigate("/academies")
+  }
 
   return (
     <div>
@@ -15,7 +18,7 @@ const Nav = ({profile,name}) => {
           Drib<span style={{color: "rgb(62, 62, 62)"}}>ble</span>
         </button>
         <div style={{display: "flex", justifyContent: "space-evenly",width: "30vw",fontSize: "30px"}}>
-          <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}}>Academies</button>
+          <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}} onClick={gotoAcademies}>Academies</button>
         
           <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}} onClick={() => navigate("/courses")}>Courses</button>
           <button className='nav-buttons' style={{backgroundColor: "transparent", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500"}}>About</button>

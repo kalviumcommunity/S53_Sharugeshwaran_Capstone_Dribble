@@ -8,6 +8,8 @@ import CourseVideo from './Courses/CourseVideo';
 import CourseLesson from './Courses/CourseLesson';
 import UserDashboard from './User/UserDashboard';
 import Popup from './User/Popup';
+import Citylisting from './Academies/CityListing';
+import AcademyDetails from './Academies/AcademyDetails';
 
 const Allroutes = () => {
   return (
@@ -22,6 +24,8 @@ const Allroutes = () => {
           <Route path='/courselesson' element={<CourseLesson/>}/>
           <Route path='/userdashboard' element={<UserDashboard/>}/>
           <Route path='/profileupdate' element={<Popup/>}/>
+          <Route path = "/academies" element={<Citylisting/>}/>
+          <Route path='/details' element={<AcademyDetails/>}/>
           </Routes>   
       </div>
 

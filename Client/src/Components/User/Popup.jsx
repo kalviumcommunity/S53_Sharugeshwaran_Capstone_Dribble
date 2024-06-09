@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDropzone } from 'react-dropzone';
 
+const Popup = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const name = location.state;
 
-const Popup = ({}) => {
-    const navigate = useNavigate()
-    const navi = () => {
-        navigate("/userdashboard",{state:updatedUserData.userName})
-    }
     const [userData, setUserData] = useState(null);
     const [updatedUserData, setUpdatedUserData] = useState({
         profilePhoto: '',
@@ -16,8 +16,6 @@ const Popup = ({}) => {
         bio: '',
         email: ''
     });
-    const location = useLocation();
-    const name = location.state;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,16 +30,13 @@ const Popup = ({}) => {
                     bio: userData.bio,
                     email: userData.email
                 });
-                // navi()
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, []);
-
-    console.log(userData)
+    }, [name]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -52,13 +47,20 @@ const Popup = ({}) => {
         e.preventDefault();
         try {
             await axios.put("https://backend-cyan-two.vercel.app/users/profile/update", updatedUserData);
-            // onClose(); // Close the popup
             console.log("User updated successfully");
-            navi()
+            navigate("/userdashboard", { state: updatedUserData.userName });
         } catch (error) {
             console.error('Error updating data:', error);
         }
     };
+
+    const onDrop = (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        // Handle file upload logic here
+        console.log(file);
+    };
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
     if (!userData) {
         return <div>Loading...</div>;
@@ -66,39 +68,28 @@ const Popup = ({}) => {
 
     return (
         <div className="popup" style={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <div className="popup-content" style={{height: "80%",width: "40%",boxShadow: "2px 2px 22px 0px gray",display: "flex", alignItems: "center",flexDirection: "column",borderRadius: "25px",background: "linear-gradient(135deg, #C17457, #EB25D2)"} }>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column",justifyContent: "space-around",height: "70%",marginTop: "10vh" }}>
+            <div className="popup-content" style={{height: "80%", width: "40%", boxShadow: "2px 2px 22px 0px gray", display: "flex", alignItems: "center", flexDirection: "column", borderRadius: "25px", background: "linear-gradient(135deg, #C17457, #EB25D2)"}}>
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", height: "70%", marginTop: "10vh" }}>
                     <div>
-                    <label>
-                        User Name:
-                    </label><br />
-                        <input type="text" name="userName" value={updatedUserData.userName} onChange={handleInputChange} style={{width: "25vw",height: "5vh",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}/>
+                        <label>User Name:</label><br />
+                        <input type="text" name="userName" value={updatedUserData.userName} onChange={handleInputChange} style={{ width: "25vw", height: "5vh", borderRadius: "10px", padding: "4%", marginTop: "1vh" }} />
                     </div>
                     <div>
-
-                    <label>
-                        City:
-                    </label><br />
-                        <input type="text" name="city" value={updatedUserData.city} onChange={handleInputChange} style={{width: "25vw",height: "5vh",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}/>
+                        <label>City:</label><br />
+                        <input type="text" name="city" value={updatedUserData.city} onChange={handleInputChange} style={{ width: "25vw", height: "5vh", borderRadius: "10px", padding: "4%", marginTop: "1vh" }} />
                     </div>
                     <div>
-                    <label>
-                        Bio:
-                    </label><br />
-                        <textarea name="bio" value={updatedUserData.bio} onChange={handleInputChange} style={{width: "25vw",borderRadius: "10px",padding: "4%",marginTop: "1vh"}}></textarea>
+                        <label>Bio:</label><br />
+                        <textarea name="bio" value={updatedUserData.bio} onChange={handleInputChange} style={{ width: "25vw", borderRadius: "10px", padding: "4%", marginTop: "1vh" }}></textarea>
                     </div>
-
-                    <button type="submit" style={{background: "black",color: "white",width: "6vw",marginLeft: "9vw",marginTop: "4vh",height: "5vh",borderRadius: "7px"}}>Update</button>
+                    <button type="submit" style={{ background: "black", color: "white", width: "6vw", marginLeft: "9vw", marginTop: "4vh", height: "5vh", borderRadius: "7px" }}>Update</button>
                 </form>
-                    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <button>Upload Picture</button>
-      }
-    </div>
-
+                <div {...getRootProps()} style={{ marginTop: "2vh" }}>
+                    <input {...getInputProps()} />
+                    {
+                        isDragActive ? <p>Drop the files here ...</p> : <button>Upload Picture</button>
+                    }
+                </div>
             </div>
         </div>
     );
