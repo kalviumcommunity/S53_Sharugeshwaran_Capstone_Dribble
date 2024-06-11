@@ -164,7 +164,7 @@ const AnimatedText = ({
   className,
 }) => {
   return (
-    <motion.span className={className} initial="hidden" animate="visible" variants={defaultAnimations} aria-hidden style={{width: "55vw"}}>
+    <motion.span className={className} initial="hidden" animate="visible" variants={defaultAnimations} aria-hidden style={{fontSize: "15rem",width:"58rem"}}>
       {text.split('').map((char, index) => (
         <motion.span className='inline-block' key={index} variants={defaultAnimations}>{char}</motion.span>
       ))}
