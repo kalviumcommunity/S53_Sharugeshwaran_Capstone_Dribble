@@ -104,3 +104,24 @@
     border-radius: 10px;
     
   }
+  html {
+    font-size: 16px; /* Default root font size */
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 15px; /* Smaller root font size for smaller screens */
+    }
+}
+
+@media (max-width: 900px) {
+    html {
+        font-size: 14px; /* Smaller root font size for even smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 13px; /* Smallest root font size for mobile devices */
+    }
+}
