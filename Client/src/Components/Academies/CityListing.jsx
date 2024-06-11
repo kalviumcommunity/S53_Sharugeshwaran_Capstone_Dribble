@@ -18,7 +18,7 @@ const Citylisting = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/academy', { location });
+                const response = await axios.post('https://backend-cyan-two.vercel.app/academy', { location });
                 setAcademies(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -118,7 +118,8 @@ const Citylisting = () => {
                 gridTemplateColumns: "repeat(3, 1fr)", 
                 rowGap: "5vh",    
                 width: "100%",
-                padding:"5vw"
+                padding:"5vw",
+                justifyItems: "center"
             }}>
                 {filteredAcademies.map((academy, index) => (
                     <AcademyCard key={index} data={academy} />
