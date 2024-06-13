@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Vector from "../../assets/Vector.png";
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 // import { useNavigate } from 'react-router-dom';
@@ -48,6 +48,7 @@ const Login = () => {
       console.log(email)
       const response = await axios.post("https://backend-cyan-two.vercel.app/users/login", info);
       console.log("Login successful");
+      localStorage.setItem("userData",JSON.stringify(response.data))
       console.log(response.data);
       navigate("/home",{state:response.data});
       // navigate("/home");

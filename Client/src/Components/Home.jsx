@@ -2,13 +2,13 @@ import React from 'react';
 import player from "../assets/player.png";
 import {motion,useViewportScroll,useTransform} from "framer-motion"
 import { useState,useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { json, useLocation, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 
 const Home = () => {
-  const [fadeInComplete, setFadeInComplete] = useState(false);
-  const location = useLocation();
-  const data = location.state;
+  const [fadeInComplete, setFadeInComplete] = useState(false)
+  const userdata = localStorage.getItem("userData");
+  const data = JSON.parse(userdata)
   const name = data.name 
   const navigate = useNavigate()
 

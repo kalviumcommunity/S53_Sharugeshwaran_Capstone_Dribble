@@ -21,10 +21,25 @@ const userSchema = new mongoose.Schema({
   city: {
     type: String,
   },
-  profilePhoto:{
-    type: String
+  profilePhoto: {
+    type: String,
+  },
+  assignments: {
+    submitted: [{
+      courseName: {
+        type: String,
+        required: true,
+      },
+      assignmentLink: {
+        type: String,
+        required: true,
+      }
+    }],
+    approved: {
+      type: [String],  
+    }
   }
-});
+});;
 
 
 
