@@ -6,11 +6,12 @@ const fs = require('fs');
 const courseRouter = express.Router();
 const User = require("../Schema/UserSchema")
 const {transporter} = require('./mail')
+require('dotenv').config()
 
 cloudinary.config({
-    cloud_name: 'df5gqodoq',
-    api_key: 794122859766147,
-    api_secret: "3ob5mPmNWm2lUgIsa6nFDU4IkhI"
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.SECRET_API,
   })
   
 
