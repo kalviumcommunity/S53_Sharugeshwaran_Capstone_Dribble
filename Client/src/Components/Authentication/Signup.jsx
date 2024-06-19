@@ -40,7 +40,7 @@ const Signup = () => {
     try {
       const response = await axios.post("https://backend-cyan-two.vercel.app/users/signup", data);
       console.log(response.data);
-      localStorage.setItem("userData",JSON.stringify(response.data))
+      localStorage.setItem("userData",JSON.stringify(response.data.user))
       navigate("/home",{state: response.data.user}) // You can handle the response data as needed
     } catch (error) {
       console.error("Error:", error);

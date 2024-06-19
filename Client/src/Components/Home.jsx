@@ -15,6 +15,14 @@ const Home = () => {
   const handleFadeInComplete = () => {
     setFadeInComplete(true);
   };
+
+  const adminNavi = () => {
+    navigate("/admin")
+  }
+  
+  if(data.email == "dribblecapstone@gmail.com"){
+    adminNavi()
+  }
   
   const { scrollYProgress } = useViewportScroll();
 

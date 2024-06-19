@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Nav = ({profile,name}) => {
   const navigate = useNavigate();
+  console.log(profile)
 
   const gotoDashboard = () => {
     navigate("/userdashboard", { state: name });

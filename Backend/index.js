@@ -29,12 +29,7 @@ const limiter = rateLimit({
   });
 
 app.use(express.json())
-app.use(cors({
-    origin: ['https://dribble-xi.vercel.app','http://localhost:5173'],
-    methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type',
-    credentials: true,
-  }));
+app.use(cors());
 app.use("/courses",courseRouter)
 app.use("/academy",AcademyRouter)
 app.use("/users", userRouter)

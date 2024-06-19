@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Vector from "../../assets/Vector.png";
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 // import { useNavigate } from 'react-router-dom';

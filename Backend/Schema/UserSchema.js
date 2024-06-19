@@ -28,17 +28,21 @@ const userSchema = new mongoose.Schema({
     submitted: [{
       courseName: {
         type: String,
-        required: true,
       },
       assignmentLink: {
         type: String,
-        required: true,
       }
     }],
     approved: {
       type: [String],  
+    },
+    rejected: {
+      type: [String]
     }
-  }
+  },
+  certificates: {
+    type: [String]
+  } 
 });;
 
 
