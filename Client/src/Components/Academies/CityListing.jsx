@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AcademyCard from "./AcademyCard";
 import axios from "axios";
+import loader from "../../assets/loader.gif"; // Adjust the path as necessary
 
 const Citylisting = () => {
     const [academies, setAcademies] = useState([]);
     const [location, setLocation] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const selectCategory = (e) => {
         setLocation(e.target.textContent);
@@ -17,11 +19,14 @@ const Citylisting = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
-                const response = await axios.post('https://backend-cyan-two.vercel.app/academy', { location });
+                const response = await axios.post('https://s53-sharugeshwaran-capstone-dribble.onrender.com/academy', { location });
                 setAcademies(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -33,7 +38,7 @@ const Citylisting = () => {
     );
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",height: academies.length>0 ? "auto" : "100vh" }}>
             <div style={{
                 display: "flex", 
                 width: '100%', 
@@ -125,6 +130,11 @@ const Citylisting = () => {
                     <AcademyCard key={index} data={academy} />
                 ))}
             </div>
+            {loading && (
+                <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <img src={loader} alt="Loading..." style={{ width: "100px" }} />
+                </div>
+            )}
         </div>
     );
 };

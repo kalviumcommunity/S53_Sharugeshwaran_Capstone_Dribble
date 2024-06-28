@@ -1,17 +1,31 @@
-const express = require("express")
-const userRouter = express.Router()
-const User = require('../Schema/UserSchema')
-const bcrypt =  require('bcrypt')
+const express = require("express");
+const userRouter = express.Router();
+const User = require('../Schema/UserSchema');
+const bcrypt = require('bcrypt');
+const cloudinary = require('cloudinary');
+const multer = require("multer");
+const generateCertificate = require('./CertficateRoute')
 
 
-userRouter.get("/", async (req,res) => {
-    try{
-        const data  = await User.find()
-        res.status(200).send(data)
-    }catch(err){
-        res.status(500).json({message : err})
+const storage = multer.memoryStorage();
+
+const upload3 = multer({ storage: storage });
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.SECRET_API,
+});
+
+const upload = multer({ dest: 'uploads/' });
+
+userRouter.get("/", async (req, res) => {
+    try {
+        const data = await User.find();
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(500).json({ message: err });
     }
-})
+});
 
 userRouter.post("/signup", async (req, res) => {
     try {
@@ -38,12 +52,11 @@ userRouter.post("/signup", async (req, res) => {
         }
 
         // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds
-
+        const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = new User({
             name,
             email,
-            password: hashedPassword, // Save the hashed password
+            password: hashedPassword, 
             bio,
             city
         });
@@ -65,22 +78,20 @@ userRouter.post("/signup", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
     const { email } = req.body;
     // console.log(hi)
-    if(!email){
-        return res.status(400).send("No email was sent.")
+    if (!email) {
+        return res.status(400).send("No email was sent.");
     }
-    console.log(email)
+    console.log(email);
     const { password } = req.body;
 
     try {
-        // Find the user by email
         const user = await User.findOne({ email: email });
-
 
         if (!user) {
             return res.status(404).send({ error: "User not found" });
         }
 
-        if(user && !password){
+        if (user && !password) {
             return res.status(200).send(user);
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
@@ -95,8 +106,10 @@ userRouter.post("/login", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-userRouter.put("/profile/update", async (req, res) => {
-    const { userName, profilePhoto,email, bio, city } = req.body;
+
+userRouter.put("/profile/update", upload.single('profilePhoto'), async (req, res) => {
+    const { userName, email, bio, city } = req.body;
+    const file = req.file;
 
     try {
         let user = await User.findOne({ email });
@@ -105,20 +118,34 @@ userRouter.put("/profile/update", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        const existingUserWithName = await User.findOne({ userName });
-        if (existingUserWithName && !(existingUserWithName.email == email)) {
+        const existingUserWithName = await User.findOne({ name: userName });
+        if (existingUserWithName && existingUserWithName.email !== email) {
             return res.status(400).json({ error: "Username already exists" });
-        }else{
+        } else {
             user.name = userName;
         }
 
-        // user.password = password;
+        if (file) {
+            try {
+       
+                const result = await cloudinary.uploader.upload(file.path, {
+                    resource_type: "image",
+                    folder: "images"
+                });
+
+
+                console.log('Photo uploaded to Cloudinary:', result);
+                user.profilePhoto = result.secure_url;
+            } catch (error) {
+                console.error('Error uploading photo to Cloudinary:', error);
+                return res.status(500).json({ error: 'Failed to upload photo' });
+            }
+        }
+
         user.bio = bio;
         user.city = city;
-        user.profilePhoto = profilePhoto
 
         await user.save();
-
         return res.status(200).json({ message: "User updated successfully", user });
     } catch (error) {
         console.error("Error updating user:", error);
@@ -126,36 +153,129 @@ userRouter.put("/profile/update", async (req, res) => {
     }
 });
 
-userRouter.post("/profile",async(req,res) => {
-    const {name} = req.body
+userRouter.post("/profile", async (req, res) => {
+    const { name } = req.body;
     try {
-        const  user  = await User.findOne({name})
-        res.status(200).json({user}) 
+        const user = await User.findOne({ name });
+        res.status(200).json({ user });
     } catch (error) {
-        res.status(400).send("Error: ",error)
+        res.status(400).send("Error: ", error);
     }
+});
 
-})
-
-userRouter.delete("/profileDelete", async(req,res) => {
-    console.log(req.body)
-    const email = req.body
+userRouter.delete("/profileDelete", async (req, res) => {
+    console.log(req.body);
+    const email = req.body;
 
     try {
-        const user = await User.findOneAndDelete(email)
-        if(!user){
-            return res.status(404).json({error: "User not found"})
+        const user = await User.findOneAndDelete(email);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
         }
-        res.status(200).json({message: "User deleted successfully"})
+        res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
-        res.status(400).json({Error: error})
+        res.status(400).json({ Error: error });
     }
+});
 
-})
+userRouter.get("/submitted-assignments", async (req, res) => {
+    try {
+
+        const users = await User.find({}, 'name assignments.submitted');
+
+
+        const submittedAssignments = users.flatMap(user =>
+            user.assignments.submitted.map(submission => ({
+                userName: user.name,
+                courseName: submission.courseName,
+                assignmentLink: submission.assignmentLink,
+            }))
+        );
+
+        res.status(200).json(submittedAssignments);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+userRouter.post("/assignment-result", upload3.single('file'),async (req, res) => {
+    const { courseName, name, result, date } = req.body;
+
+    console.log(name);
+
+    try {
+        const user = await User.findOne({ name });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        if (result === "approved") {
+            if (user.assignments.rejected.includes(courseName)) {
+                user.assignments.rejected = user.assignments.rejected.filter(
+                    course => course !== courseName
+                );
+            }
+
+            user.assignments.approved.push(courseName);
+
+            const certificateLink = await generateCertificate({ courseName, name, date });
+
+            user.assignments.submitted = user.assignments.submitted.filter(
+                assignment => assignment.courseName !== courseName
+            );
+            
+            user.certificates.push(certificateLink)
+
+            await user.save();
+            const updatedUser = await User.findOne({ name });
+            console.log(updatedUser);
+
+            res.status(200).json({
+                message: "Assignment result updated successfully",
+                user: updatedUser,
+                certificateLink: certificateLink
+            });
+
+        } else if (result === "rejected") {
+            if (!user.assignments.rejected.includes(courseName)) {
+                user.assignments.rejected.push(courseName);
+            }
+
+            user.assignments.submitted = user.assignments.submitted.filter(
+                assignment => assignment.courseName !== courseName
+            );
+
+            await user.save();
+            const updatedUser = await User.findOne({ name });
+            console.log(updatedUser);
+
+            res.status(200).json({
+                message: "Assignment result updated successfully",
+                user: updatedUser
+            });
+
+        } else {
+            return res.status(400).send("Invalid result");
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server error");
+    }
+});
 
 
 
 
-module.exports = {
-        userRouter
-}
+module.exports = {userRouter};
+
+
+
+
+
+
+
+
+
+

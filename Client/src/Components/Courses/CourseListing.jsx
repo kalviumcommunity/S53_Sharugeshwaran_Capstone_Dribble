@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react';
 import Nav from '../Nav';
 import CourseCard from './CourseCard';
 import axios from 'axios';
+import loader from '../../assets/loader.gif'; // Adjust the path as necessary
 
 const CourseListing = () => {
     const [courses, setCourses] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
-                const response = await axios.get('https://backend-cyan-two.vercel.app/courses');
-                // const data = await response;
+                const response = await axios.get('https://s53-sharugeshwaran-capstone-dribble.onrender.com/courses');
                 setCourses(response.data);
-                // console.log(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -33,7 +36,7 @@ const CourseListing = () => {
     return (
         <>
             {/* <Nav/> */}
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-around", padding: "3vh 0", alignItems: "center", paddingTop: "10vh"}}>
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-around", padding: "3vh 0", alignItems: "center", paddingTop: "10vh", height: courses.length > 0 ? "auto" : "100vh"}}>
                 <div style={{display: "flex", width: '100%', justifyContent: "space-around", alignItems: "center"}}>
                     <div>
                         <div style={{fontSize: "4rem", color: "rgb(202, 69, 65)", fontWeight: "700", lineHeight: "75px", fontFamily: "Inter"}}>
@@ -66,10 +69,14 @@ const CourseListing = () => {
                         ))
                     }
                 </div>
+                {loading && (
+                    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <img src={loader} alt="Loading..." style={{ width: "100px" }} />
+                    </div>
+                )}
             </div>
         </>
     );
 }
 
 export default CourseListing;
-``

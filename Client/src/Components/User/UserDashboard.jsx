@@ -15,14 +15,12 @@ const UserDashboard = () => {
     // const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate() // State for managing popup visibility
 
-    const certificates = [
-        "https://marketplace.canva.com/EAFlVDzb7sA/1/0/1600w/canva-white-gold-elegant-modern-certificate-of-participation-bK_WEelNCjo.jpg","https://m.media-amazon.com/images/I/71rf-yB92VL._AC_UF1000,1000_QL80_.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNFDbsVvKWitCA2AsLsFmprZcNeWuB9HeY_uP16E-1dQ&s"
-    ];
+   
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("https://backend-cyan-two.vercel.app/users/profile", { name });
+                const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/profile", { name });
 
                 setUserData(response.data.user);
                 console.log(response.data.user);
@@ -39,7 +37,7 @@ const UserDashboard = () => {
     const deleteProfile = async () => {
         console.log(email)
         try {
-            const response = await axios.delete("https://backend-cyan-two.vercel.app/users/profileDelete",  email );
+            const response = await axios.delete("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/profileDelete",  email );
             console.log("Profile deleted successfully:", response.data);
             navigate("/")
         } catch (error) {
@@ -71,7 +69,7 @@ const UserDashboard = () => {
                 </div>
                 <div style={{display: "flex",justifyContent: "space-between",alignItems: "center",width: "50vw",flexDirection: "column"}}>
                     <div style={{height: "10vh",backgroundColor: "white",width: "100%",borderTopLeftRadius: "15px",borderTopRightRadius:"15px"}}></div>
-                    <div style={{height: "20vh",backgroundColor: "rgb(62, 62, 62)",width: "100%",marginTop: "1vh",borderBottomRightRadius: "15px",borderBottomLeftRadius: "15px"}}></div>
+                    <div style={{height: "24vh",backgroundColor: "rgb(62, 62, 62)",width: "100%",marginTop: "1vh",borderBottomRightRadius: "15px",borderBottomLeftRadius: "15px"}}></div>
                     <div style={{position: "absolute",display: "flex",flexDirection: "column",alignItems: "center",textAlign: "center",color: "white",zIndex: "1",top: "30vh"}}>
                     <img src={!userData.profilePhoto ? profilePic:userData.profilePhoto} alt="" style={{ borderRadius: "50%", height: "15vh" }} />
 
@@ -90,9 +88,11 @@ const UserDashboard = () => {
                     <div style={{backgroundColor: "rgb(235, 233, 233)",padding: "6%",marginBottom: "7vh",borderRadius: "15px",width: "50vw"}}>
                         <h1 style={{marginBottom: "3vh",fontWeight: "600",fontSize: "1.2rem"}}>Certificates</h1>
                         <div className='certificate-showcase' style={{display: "flex",overflow: "auto"}}>
-                            {certificates.map((e,i) => {
+                            {userData.certificates.map((e,i) => {
                                 return(
-                                    <img src={e} alt="" key={i} style={{height: "30vh"}}/>
+                                    <a href={e} download key={i}>
+                                    <img src={e} alt={`Certificate ${i}`} style={{height: "30vh"}} />
+                                </a>
                                 )
                             })}
                         </div>

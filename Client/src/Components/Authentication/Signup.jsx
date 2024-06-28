@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 import Vector from "../../assets/Vector.png";
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import loader from '../../assets/loader.gif'; // Adjust the path as necessary
+import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [value,setValue] = useState("")
-  const [paa,setpaa] = useState("")
-  const navigate  = useNavigate("")
-
+  const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setValue(localStorage.getItem("email"))
-  })
+    setValue(localStorage.getItem("email"));
+  }, []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -30,20 +29,19 @@ const Signup = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    const data = {
-      name,
-      email,
-      password
-    };
-
+    event.preventDefault();
+    const data = { name, email, password };
+    
+    setLoading(true);
     try {
-      const response = await axios.post("https://backend-cyan-two.vercel.app/users/signup", data);
+      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/signup", data);
       console.log(response.data);
-      localStorage.setItem("userData",JSON.stringify(response.data))
-      navigate("/home",{state: response.data.user}) // You can handle the response data as needed
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
+      navigate("/home", { state: response.data.user });
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,7 +53,6 @@ const Signup = () => {
         </div>
         <div style={{
           marginLeft: "5%",
-          marginTop: "",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-evenly",
@@ -72,15 +69,19 @@ const Signup = () => {
               <input type="email" placeholder='Enter E-Mail here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none" }} value={email} onChange={handleEmailChange} /> <br />
               <input type="password" placeholder='Enter password here' style={{ marginBottom: "2vh", height: "5vh", width: "20vw", borderRadius: "8px", outline: "none" }} value={password} onChange={handlePasswordChange} />
               <p style={{ color: "blue" }}></p>
-              <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px",width: "20vw",marginTop: "5vh"}}>Sign Up</button>
+              <button type="submit" style={{ backgroundColor: "blue", color: "white", fontFamily: "Inter,sansserif", border: "none", height: "5vh", borderRadius: "10px", width: "20vw", marginTop: "5vh" }}>Sign Up</button>
             </form>
-          <p style={{marginTop: "2%"}}>Already have an account? <Link to={"/login"}><button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Log In</button></Link></p>
+            <p style={{ marginTop: "2%" }}>Already have an account? <Link to={"/login"}><button style={{ backgroundColor: "white", border: "none", color: "blue", fontFamily: "Inter,sansserif" }}>Log In</button></Link></p>
           </div>
-          
         </div>
       </div>
+      {loading && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <img src={loader} alt="Loading..." style={{ width: "100px" }} />
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default Signup;

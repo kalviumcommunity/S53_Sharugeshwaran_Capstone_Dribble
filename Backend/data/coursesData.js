@@ -31,9 +31,7 @@ const course1 = new  Course({
                     url : "https://www.youtube.com/embed/eWux_kJPmls?si=enP5ixvBtZNPATQv"
                 },
             ]
-        },{
-
-        }
+        },
     ]
 })
 

@@ -10,6 +10,8 @@ import UserDashboard from './User/UserDashboard';
 import Popup from './User/Popup';
 import Citylisting from './Academies/CityListing';
 import AcademyDetails from './Academies/AcademyDetails';
+import AdminHome from './Admin/AdminHome';
+ 
 
 const Allroutes = () => {
   return (
@@ -26,6 +28,7 @@ const Allroutes = () => {
           <Route path='/profileupdate' element={<Popup/>}/>
           <Route path = "/academies" element={<Citylisting/>}/>
           <Route path='/details' element={<AcademyDetails/>}/>
+          <Route path="/admin" element={<AdminHome/>}/>
           </Routes>   
       </div>
 

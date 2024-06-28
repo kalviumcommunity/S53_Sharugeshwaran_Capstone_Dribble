@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Vector from "../../assets/Vector.png";
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
-// import { useNavigate } from 'react-router-dom';
+import loader from "../../assets/loader.gif";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -20,44 +21,47 @@ const Login = () => {
   };
 
   const navigateSignup = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { email, password };
+    setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/users/login", data);
+      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/login", data);
       console.log(response.data);
       console.log("Login successful");
-      navigate("/home",{state:response.data});
+      navigate("/home", { state: response.data });
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setLoading(true);
+
     try {
       const user = await signInWithPopup(auth, provider);
-      // const user = result.user;
-      const email = user.user.email
-      const info = {
-        email: email
-      }
-      console.log(email)
-      const response = await axios.post("https://backend-cyan-two.vercel.app/users/login", info);
+      const email = user.user.email;
+      const info = { email: email };
+      console.log(email);
+      const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/login", info);
       console.log("Login successful");
-      localStorage.setItem("userData",JSON.stringify(response.data))
+      localStorage.setItem("userData", JSON.stringify(response.data));
       console.log(response.data);
-      navigate("/home",{state:response.data});
-      // navigate("/home");
+      navigate("/home", { state: response.data });
     } catch (error) {
       if (error.code === 'auth/cancelled-popup-request') {
         console.log("Google login cancelled");
       } else {
         console.error("Error:", error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,6 +104,11 @@ const Login = () => {
           </button>
         </div>
       </div>
+      {loading && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <img src={loader} alt="Loading..." style={{ width: "100px" }} />
+        </div>
+      )}
     </div>
   );
 };
