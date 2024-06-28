@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Certificate from "./Certificate";
-// import { toPng } from 'html-to-image';
 
 const AdminHome = () => {
     const [assignments, setAssignments] = useState([]);
-    const [showCertificate, setShowCertificate] = useState(false);
-    const certificateRef = useRef();
     const navigate = useNavigate();
-    const date = new Date()
+    const date = new Date();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/users/submitted-assignments');
+                const response = await axios.get('https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/submitted-assignments');
                 setAssignments(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -33,14 +29,12 @@ const AdminHome = () => {
 
     const handleResult = async (assignment, result) => {
         try {
-            const response = await axios.post('http://localhost:3000/users/assignment-result', {
+            const response = await axios.post('https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/assignment-result', {
                 courseName: assignment.courseName,
                 name: assignment.userName,
                 result: result,
-                date : date
+                date: date
             });
-
-           
 
             console.log(response.data);
 
@@ -53,43 +47,13 @@ const AdminHome = () => {
         }
     }
 
-    // const generateAndUploadCertificate = async (course, name) => {
-    //     try {
-    //         // Ensure Certificate component is rendered before capturing it
-    //         setShowCertificate(true);
-
-    //         // Wait for Certificate component to render
-    //         await new Promise(resolve => setTimeout(resolve, 100)); // Adjust delay if necessary
-
-    //         // Generate image from HTML
-    //         const dataUrl = await toPng(certificateRef.current);
-    //         const blob = await (await fetch(dataUrl)).blob();
-
-    //         // Create FormData and append the blob
-    //         const formData = new FormData();
-    //         formData.append('file', blob);
-    //         formData.append('courseName', course);
-    //         formData.append('name', name);
-
-    //         // Make the API request to upload the file
-    //         const response = await axios.post('http://localhost:3000/upload', formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //         });
-
-    //         console.log('File uploaded successfully:', response.data);
-    //     } catch (error) {
-    //         console.error('Error generating and uploading certificate:', error);
-    //     } finally {
-    //         // Reset showCertificate state after upload (optional)
-    //         setShowCertificate(false);
-    //     }
-    // }
-
     return (
         <div style={{ padding: '20px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Submitted Assignments</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '24px' }}>Welcome Admin</h1>
+            <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '18px' }}>
+                Manage submitted assignments here. Review and approve/reject assignments for courses.
+            </p>
+            <h2 style={{ textAlign: 'center', marginBottom: '20px', fontSize: '20px' }}>Submitted Assignments</h2>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {assignments.map((assignment, index) => (
                     <div key={index} style={{ marginBottom: '30px', border: '1px solid #ccc', padding: '20px', borderRadius: '5px' }}>

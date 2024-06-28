@@ -11,7 +11,7 @@ import Popup from './User/Popup';
 import Citylisting from './Academies/CityListing';
 import AcademyDetails from './Academies/AcademyDetails';
 import AdminHome from './Admin/AdminHome';
-import Certificate from './Admin/Certificate';
+ 
 
 const Allroutes = () => {
   return (
@@ -29,7 +29,6 @@ const Allroutes = () => {
           <Route path = "/academies" element={<Citylisting/>}/>
           <Route path='/details' element={<AcademyDetails/>}/>
           <Route path="/admin" element={<AdminHome/>}/>
-          <Route path='/courseCertificate' element={<Certificate/>}/>
           </Routes>   
       </div>
 

@@ -3,6 +3,8 @@ import player from "../assets/player.png";
 import {motion,useViewportScroll,useTransform} from "framer-motion"
 import { useState,useEffect } from 'react';
 import { json, useLocation, useNavigate } from 'react-router-dom';
+import academies from "../assets/academies.png"
+import courses from "../assets/courses.png"
 import Nav from './Nav';
 
 const Home = () => {
@@ -71,9 +73,7 @@ const Home = () => {
           margin: "-200px"
         }}
         >
-          <div style={{height: "46vh",width: "36vw",borderRadius: "20px"}} className='hey'>
-
-          </div>
+              <img src={academies} alt="" style={{height: "46vh",width: "36vw",borderRadius: "20px",border: "3px solid gray"}}/>
           <div>
             <p style={{fontSize: "77px",fontWeight: "700",color: "rgb(62, 62, 62)", lineHeight :"9.5vh"}}>Best <br />Courses</p>
             <br />
@@ -103,9 +103,7 @@ const Home = () => {
             <p>This courses are catered to the latest trends <br />in the football. Watch, learn and perform to <br />complete a specific skill. </p>
             <button style={{backgroundColor: "rgb(202, 69, 65)",height: "8vh",width: "16vw",borderRadius: "15px", border: "none", fontFamily: "Inter, sans-serif",fontSize: "16px",fontWeight: "500",marginTop :"6vh",color: "white"}}>GET INTO AN ACADEMY</button>
           </div>
-          <div style={{height: "46vh",width: "36vw",backgroundColor: "black",borderRadius: "20px"}}>
-
-          </div>
+          <img src={courses} alt="" style={{height: "46vh",width: "36vw",borderRadius: "20px",border: "3px solid gray"}}/>
         </motion.section>
       </div>
       <footer>

@@ -52,12 +52,11 @@ userRouter.post("/signup", async (req, res) => {
         }
 
         // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 is the saltRounds
-
+        const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = new User({
             name,
             email,
-            password: hashedPassword, // Save the hashed password
+            password: hashedPassword, 
             bio,
             city
         });
@@ -86,7 +85,6 @@ userRouter.post("/login", async (req, res) => {
     const { password } = req.body;
 
     try {
-        // Find the user by email
         const user = await User.findOne({ email: email });
 
         if (!user) {
@@ -129,14 +127,12 @@ userRouter.put("/profile/update", upload.single('profilePhoto'), async (req, res
 
         if (file) {
             try {
-                // Upload photo to Cloudinary and specify the folder
+       
                 const result = await cloudinary.uploader.upload(file.path, {
                     resource_type: "image",
                     folder: "images"
                 });
 
-                // Remove the file from local uploads folder after uploading to Cloudinary
-                // fs.unlinkSync(file.path);
 
                 console.log('Photo uploaded to Cloudinary:', result);
                 user.profilePhoto = result.secure_url;
@@ -182,13 +178,12 @@ userRouter.delete("/profileDelete", async (req, res) => {
     }
 });
 
-// New route for retrieving submitted assignments
 userRouter.get("/submitted-assignments", async (req, res) => {
     try {
-        // Fetch all users with the required fields
+
         const users = await User.find({}, 'name assignments.submitted');
 
-        // Map the data to the required format
+
         const submittedAssignments = users.flatMap(user =>
             user.assignments.submitted.map(submission => ({
                 userName: user.name,
@@ -225,7 +220,6 @@ userRouter.post("/assignment-result", upload3.single('file'),async (req, res) =>
 
             user.assignments.approved.push(courseName);
 
-            // Generate the certificate and get the certificate link from Cloudinary
             const certificateLink = await generateCertificate({ courseName, name, date });
 
             user.assignments.submitted = user.assignments.submitted.filter(

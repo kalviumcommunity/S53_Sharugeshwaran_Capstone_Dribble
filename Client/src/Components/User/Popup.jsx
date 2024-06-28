@@ -21,7 +21,7 @@ const Popup = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post("https://backend-cyan-two.vercel.app/users/profile", { name });
+                const response = await axios.post("https://s53-sharugeshwaran-capstone-dribble.onrender.com/users/profile", { name });
                 const userData = response.data.user;
                 setUserData(userData);
                 setUpdatedUserData({
